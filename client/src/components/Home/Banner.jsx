@@ -1,5 +1,5 @@
 import { Box, makeStyles, Typography } from "@material-ui/core";
-import { mergeClasses } from "@material-ui/styles";
+
 import React from "react";
 
 const useStyles = makeStyles({

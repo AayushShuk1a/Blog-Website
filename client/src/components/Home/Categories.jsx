@@ -15,7 +15,7 @@ import { catergories } from "../../Constants/data";
 const useStyles = makeStyles({
   button: {
     margin: 20,
-    width: "85%",
+    width: "86%",
     backgroundColor: "#6495ED",
     color: "#fff",
   },
