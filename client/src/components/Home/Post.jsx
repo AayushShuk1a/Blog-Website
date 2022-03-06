@@ -48,7 +48,7 @@ const Post = () => {
       <Typography className={classes.detail}>
         ÷ is the third studio album by English singer-songwriter Ed Sheeran. It
         was released on 3 March 2017 through Asylum Records and Atlantic
-        Records.saddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        Records.
       </Typography>
     </Box>
   );
