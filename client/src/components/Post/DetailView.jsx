@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Delete, Edit } from "@material-ui/icons";
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -51,7 +52,9 @@ const DetailView = () => {
     <Box className={classes.container}>
       <img src={url} alt="banner" className={classes.image}></img>
       <Box className={classes.icons}>
-        <Edit className={classes.icon} color="primary" />
+        <Link to="/update">
+          <Edit className={classes.icon} color="primary" />
+        </Link>
         <Delete className={classes.icon} color="error" />
       </Box>
 

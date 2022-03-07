@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 
 import { catergories } from "../../Constants/data";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   button: {
@@ -22,15 +23,21 @@ const useStyles = makeStyles({
   table: {
     border: "1px solid rgba(224,224,224,1)",
   },
+  link: {
+    textDecoration: "none",
+    color: "inherit",
+  },
 });
 
 const Catergories = () => {
   const classes = useStyles();
   return (
     <>
-      <Button variant="contained" className={classes.button}>
-        Create Blog
-      </Button>
+      <Link to="/create" className={classes.link}>
+        <Button variant="contained" className={classes.button}>
+          Create Blog
+        </Button>
+      </Link>
 
       <Table className={classes.table}>
         <TableHead>
