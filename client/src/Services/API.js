@@ -36,3 +36,11 @@ export const UpdatePost = async (id, post) => {
     console.log("Failed When Calling UpdatePost API", error);
   }
 };
+
+export const deleteBlog = async (id) => {
+  try {
+    return await axios.delete(`${url}/delete/${id}`);
+  } catch (error) {
+    console.log("Error While using Delete API");
+  }
+};

@@ -1,7 +1,6 @@
 import post from "../Schema/Post-Schema.js";
 
 export const createPost = async (request, response) => {
-  console.log(request.body);
   try {
     const Post = await new post(request.body);
     Post.save();
@@ -33,6 +32,16 @@ export const updatePost = async (request, response) => {
   try {
     await post.findByIdAndUpdate(request.params.id, { $set: request.body });
     response.status(200).json("Blog Saved Succes");
+  } catch (error) {
+    response.status(500).json(error);
+  }
+};
+
+export const deletePost = async (request, response) => {
+  try {
+    let Post = await post.findById(request.params.id);
+    Post.delete();
+    response.status(200).json("Delete");
   } catch (error) {
     response.status(500).json(error);
   }

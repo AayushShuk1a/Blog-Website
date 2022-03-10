@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Delete, Edit } from "@material-ui/icons";
 
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getPost } from "../../Services/API";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { getPost, deleteBlog } from "../../Services/API";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 5,
     border: "1px solid #878787",
     borderRadius: 10,
+    cursor: "pointer",
   },
   heading: {
     fontSize: 38,
@@ -48,6 +49,7 @@ const DetailView = ({ match }) => {
   const [post, setpost] = useState({});
   const { id } = useParams();
   console.log(id);
+  let navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,6 +60,11 @@ const DetailView = ({ match }) => {
 
     fetchData();
   }, [id]);
+
+  const DeleteBlog = async () => {
+    await deleteBlog(id);
+    navigate("/");
+  };
 
   const url =
     "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
@@ -73,7 +80,7 @@ const DetailView = ({ match }) => {
         <Link to={`/update/${post._id}`}>
           <Edit className={classes.icon} color="primary" />
         </Link>
-        <Delete className={classes.icon} color="error" />
+        <Delete onClick={DeleteBlog} className={classes.icon} color="error" />
       </Box>
 
       <Typography className={classes.heading}>{post.title}</Typography>
