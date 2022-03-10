@@ -22,12 +22,12 @@ const Posts = () => {
   return (
     <>
       {posts.map((post) => (
-        <Grid item lg={3} sm={4} xs={12}>
+        <Grid key={post._id} item lg={3} sm={4} xs={12}>
           <Link
             to={`/details/${post._id}`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            <Post key={post.title} post={post}></Post>
+            <Post post={post}></Post>
           </Link>
         </Grid>
       ))}

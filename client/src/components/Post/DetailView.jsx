@@ -70,7 +70,7 @@ const DetailView = ({ match }) => {
         className={classes.image}
       ></img>
       <Box className={classes.icons}>
-        <Link to="/update">
+        <Link to={`/update/${post._id}`}>
           <Edit className={classes.icon} color="primary" />
         </Link>
         <Delete className={classes.icon} color="error" />

@@ -28,3 +28,11 @@ export const getPost = async (id) => {
     console.log("Error While calling getPost API");
   }
 };
+
+export const UpdatePost = async (id, post) => {
+  try {
+    return await axios.post(`${url}/update/${id}`, post);
+  } catch (error) {
+    console.log("Failed When Calling UpdatePost API", error);
+  }
+};

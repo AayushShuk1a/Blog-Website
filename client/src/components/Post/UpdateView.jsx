@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   FormControl,
@@ -8,6 +8,8 @@ import {
   TextareaAutosize,
 } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
+import { getPost, UpdatePost } from "../../Services/API";
+import { useNavigate, useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -40,8 +42,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const initialValue = {
+  title: "",
+  description: "",
+  picture: "",
+  username: "Aayush Shukla",
+  createData: new Date(),
+  categories: "All",
+};
+
 const UpdateView = () => {
+  let navigate = useNavigate();
   const classes = useStyles();
+
+  const [Post, setPost] = useState(initialValue);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await getPost(id);
+      console.log(data);
+      setPost(data);
+    };
+
+    fetchData();
+  }, []);
+
+  const ChangeHandler = (e) => {
+    setPost({ ...Post, [e.target.name]: e.target.value });
+  };
+
+  const updateVlog = async () => {
+    await UpdatePost(id, Post);
+    navigate(`/details/${id}`);
+  };
 
   const url =
     "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
@@ -55,8 +89,11 @@ const UpdateView = () => {
         <InputBase
           placeholder="title"
           className={classes.textfield}
+          value={Post.title}
+          onChange={(e) => ChangeHandler(e)}
+          name="title"
         ></InputBase>
-        <Button variant="contained" color="primary">
+        <Button onClick={updateVlog} variant="contained" color="primary">
           Update
         </Button>
       </FormControl>
@@ -64,7 +101,9 @@ const UpdateView = () => {
       <TextareaAutosize
         minRows={5}
         className={classes.textarea}
-        placeholder="Tell Your Story..."
+        defaultValue={Post.description}
+        onChange={(e) => ChangeHandler(e)}
+        name="description"
       ></TextareaAutosize>
     </Box>
   );
