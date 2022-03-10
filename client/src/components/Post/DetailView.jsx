@@ -2,8 +2,9 @@ import { Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Delete, Edit } from "@material-ui/icons";
 
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { getPost } from "../../Services/API";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,15 +43,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DetailView = () => {
+const DetailView = ({ match }) => {
   const classes = useStyles();
+  const [post, setpost] = useState({});
+  const { id } = useParams();
+  console.log(id);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await getPost(id);
+      console.log(data);
+      setpost(data);
+    };
+
+    fetchData();
+  }, [id]);
 
   const url =
     "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
 
   return (
     <Box className={classes.container}>
-      <img src={url} alt="banner" className={classes.image}></img>
+      <img
+        src={post.picture || url}
+        alt="banner"
+        className={classes.image}
+      ></img>
       <Box className={classes.icons}>
         <Link to="/update">
           <Edit className={classes.icon} color="primary" />
@@ -58,20 +76,17 @@ const DetailView = () => {
         <Delete className={classes.icon} color="error" />
       </Box>
 
-      <Typography className={classes.heading}>Ed Sheeran</Typography>
+      <Typography className={classes.heading}>{post.title}</Typography>
 
       <Box className={classes.subheading}>
         <Typography>
-          Author:<span style={{ fontWeight: 600 }}>Aayush Shukla</span>
+          Author:<span style={{ fontWeight: 600 }}>{post.username}</span>
         </Typography>
-        <Typography style={{ marginLeft: "auto" }}>7 March 2022</Typography>
+        <Typography style={{ marginLeft: "auto" }}>
+          {new Date(post.createData).toDateString()}
+        </Typography>
       </Box>
-      <Typography>
-        ÷ is the third studio album by English singer-songwriter Ed Sheeran. It
-        was released on 3 March 2017 through Asylum Records and Atlantic
-        Records. "Castle on the Hill" and "Shape of You" were released as the
-        album's lead singles on 6 January 2017.
-      </Typography>
+      <Typography>{post.description}</Typography>
     </Box>
   );
 };

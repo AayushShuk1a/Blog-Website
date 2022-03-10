@@ -18,3 +18,13 @@ export const getAllPosts = async () => {
     console.log("Error while Calling getAllPost API ", error);
   }
 };
+
+export const getPost = async (id) => {
+  try {
+    let response = await axios.get(`${url}/details/${id}`);
+
+    return response.data;
+  } catch (error) {
+    console.log("Error While calling getPost API");
+  }
+};

@@ -19,3 +19,12 @@ export const getAllPosts = async (request, response) => {
     response.status(500).json(error);
   }
 };
+
+export const getPost = async (request, response) => {
+  try {
+    let Post = await post.findById(request.params.id);
+    response.status(200).json(Post);
+  } catch (error) {
+    response.status(500).json(error);
+  }
+};
