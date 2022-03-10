@@ -47,7 +47,7 @@ const Catergories = () => {
         </TableHead>
         <TableBody>
           {catergories.map((category) => (
-            <TableRow>
+            <TableRow key={category}>
               <TableCell>{category}</TableCell>
             </TableRow>
           ))}

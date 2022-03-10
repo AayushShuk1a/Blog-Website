@@ -35,20 +35,23 @@ const useStyles = makeStyles({
     overflow: "scroll",
   },
 });
-const Post = () => {
+const Post = (props) => {
   const classes = useStyles();
-  const url =
-    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80";
+  const url = props.post.picture
+    ? `"${props.post.picture}"`
+    : "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80";
   return (
     <Box className={classes.container}>
       <img src={url} alt="Blog" className={classes.image}></img>
-      <Typography className={classes.textcolor}>Music</Typography>
-      <Typography className={classes.title}>Ed Sheeran</Typography>
-      <Typography className={classes.textcolor}>Aayush Shukla</Typography>
+      <Typography className={classes.textcolor}>
+        {props.post.categories}
+      </Typography>
+      <Typography className={classes.title}>{props.post.title}</Typography>
+      <Typography className={classes.textcolor}>
+        {props.post.username}
+      </Typography>
       <Typography className={classes.detail}>
-        ÷ is the third studio album by English singer-songwriter Ed Sheeran. It
-        was released on 3 March 2017 through Asylum Records and Atlantic
-        Records.
+        {props.post.description}
       </Typography>
     </Box>
   );

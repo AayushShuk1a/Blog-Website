@@ -10,3 +10,12 @@ export const createPost = async (request, response) => {
     response.status(500).json(error);
   }
 };
+
+export const getAllPosts = async (request, response) => {
+  try {
+    let posts = await post.find({});
+    response.status(200).json(posts);
+  } catch (error) {
+    response.status(500).json(error);
+  }
+};
