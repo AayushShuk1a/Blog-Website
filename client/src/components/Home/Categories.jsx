@@ -42,13 +42,21 @@ const Catergories = () => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Categories</TableCell>
+            <TableCell>
+              <Link to={"/?category=All"} className={classes.link}>
+                All Categories
+              </Link>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {catergories.map((category) => (
             <TableRow key={category}>
-              <TableCell>{category}</TableCell>
+              <TableCell>
+                <Link to={`/?category=${category}`} className={classes.link}>
+                  {category}
+                </Link>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
