@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   FormControl,
@@ -8,7 +8,7 @@ import {
   TextareaAutosize,
 } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
-import { createPost } from "../../Services/API";
+import { createPost, UploadFile } from "../../Services/API";
 import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,9 +55,28 @@ const CreateView = () => {
   let navigate = useNavigate();
   const classes = useStyles();
   const [Post, setPost] = useState(initialValue);
+  const [File, setFile] = useState("");
+  const [image, setImage] = useState("");
 
-  const url =
-    "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
+  useEffect(() => {
+    const fetchData = async () => {
+      if (File) {
+        const data = new FormData();
+        data.append("name", File.name);
+        data.append("file", File);
+
+        const image = await UploadFile(data);
+        Post.picture = image.data;
+        setImage(image.data);
+      }
+    };
+
+    fetchData();
+  }, [File]);
+
+  const url = Post.picture
+    ? Post.picture
+    : "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
 
   const handleChange = (e) => {
     setPost({ ...Post, [e.target.name]: e.target.value });
@@ -73,7 +92,16 @@ const CreateView = () => {
       <img src={url} alt="banner" className={classes.image}></img>
 
       <FormControl className={classes.form}>
-        <AddCircle fontSize="large" color="action"></AddCircle>
+        <label htmlFor="addimage">
+          <AddCircle fontSize="large" color="action"></AddCircle>
+        </label>
+        <input
+          type="file"
+          id="addimage"
+          style={{ display: "none" }}
+          onChange={(e) => setFile(e.target.files[0])}
+        ></input>
+
         <InputBase
           onChange={(e) => handleChange(e)}
           placeholder="title"

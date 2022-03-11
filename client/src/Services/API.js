@@ -45,3 +45,11 @@ export const deleteBlog = async (id) => {
     console.log("Error While using Delete API");
   }
 };
+
+export const UploadFile = async (data) => {
+  try {
+    return await axios.post(`${url}/file/upload`, data);
+  } catch (error) {
+    console.log("Error While Calling Upload File API", error);
+  }
+};
