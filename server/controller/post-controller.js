@@ -12,7 +12,17 @@ export const createPost = async (request, response) => {
 
 export const getAllPosts = async (request, response) => {
   try {
-    let posts = await post.find({});
+    let username = request.query.username;
+    let category = request.query.category;
+    let posts;
+    if (username) {
+      posts = await post.find({ username: username });
+    } else if (category) {
+      posts = await post.find({ categories: category });
+    } else {
+      posts = await post.find({});
+    }
+
     response.status(200).json(posts);
   } catch (error) {
     response.status(500).json(error);

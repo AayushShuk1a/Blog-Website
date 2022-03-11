@@ -42,9 +42,13 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
     },
   },
+  link: {
+    textDecoration: "none",
+    color: "inherit",
+  },
 }));
 
-const DetailView = ({ match }) => {
+const DetailView = () => {
   const classes = useStyles();
   const [post, setpost] = useState({});
   const { id } = useParams();
@@ -86,9 +90,11 @@ const DetailView = ({ match }) => {
       <Typography className={classes.heading}>{post.title}</Typography>
 
       <Box className={classes.subheading}>
-        <Typography>
-          Author:<span style={{ fontWeight: 600 }}>{post.username}</span>
-        </Typography>
+        <Link to={`/?username=${post.username}`} className={classes.link}>
+          <Typography>
+            Author:<span style={{ fontWeight: 600 }}>{post.username}</span>
+          </Typography>
+        </Link>
         <Typography style={{ marginLeft: "auto" }}>
           {new Date(post.createData).toDateString()}
         </Typography>
