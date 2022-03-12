@@ -29,7 +29,9 @@ const NavBar = () => {
         </Link>
         <Typography>About</Typography>
         <Typography>Contact</Typography>
-        <Typography>Login</Typography>
+        <Link to={"/auth"} className={classes.link}>
+          <Typography>Login</Typography>
+        </Link>
       </Toolbar>
     </AppBar>
   );
