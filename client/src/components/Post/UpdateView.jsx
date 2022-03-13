@@ -46,7 +46,7 @@ const initialValue = {
   title: "",
   description: "",
   picture: "",
-  username: "Aayush Shukla",
+  username: "",
   createData: new Date(),
   categories: "All",
 };

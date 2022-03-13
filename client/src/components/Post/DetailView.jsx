@@ -80,12 +80,20 @@ const DetailView = () => {
         alt="banner"
         className={classes.image}
       ></img>
-      <Box className={classes.icons}>
-        <Link to={`/update/${post._id}`}>
-          <Edit className={classes.icon} color="primary" />
-        </Link>
-        <Delete onClick={DeleteBlog} className={classes.icon} color="error" />
-      </Box>
+      {localStorage.getItem("profile") &&
+        post.username ===
+          JSON.parse(localStorage.getItem("profile")).username && (
+          <Box className={classes.icons}>
+            <Link to={`/update/${post._id}`}>
+              <Edit className={classes.icon} color="primary" />
+            </Link>
+            <Delete
+              onClick={DeleteBlog}
+              className={classes.icon}
+              color="error"
+            />
+          </Box>
+        )}
 
       <Typography className={classes.heading}>{post.title}</Typography>
 

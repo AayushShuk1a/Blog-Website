@@ -11,6 +11,9 @@ import { AddCircle } from "@material-ui/icons";
 import { createPost, UploadFile } from "../../Services/API";
 import { useNavigate } from "react-router-dom";
 
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+
 const useStyles = makeStyles((theme) => ({
   container: {
     margin: "50px 100px",
@@ -46,12 +49,15 @@ const initialValue = {
   title: "",
   description: "",
   picture: "",
-  username: "Aayush Shukla",
+  username: "",
   createData: new Date(),
   categories: "All",
 };
 
 const CreateView = () => {
+  const options = ["Music", "Tech", "Movies", "Sports", "Fashion"];
+  const defaultOption = options[0];
+
   let navigate = useNavigate();
   const classes = useStyles();
   const [Post, setPost] = useState(initialValue);
@@ -67,6 +73,7 @@ const CreateView = () => {
 
         const image = await UploadFile(data);
         Post.picture = image.data;
+
         setImage(image.data);
       }
     };
@@ -79,13 +86,19 @@ const CreateView = () => {
     : "https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80";
 
   const handleChange = (e) => {
-    setPost({ ...Post, [e.target.name]: e.target.value });
+    setPost({
+      ...Post,
+      [e.target.name]: e.target.value,
+      username: JSON.parse(localStorage.getItem("profile")).username,
+    });
   };
 
   const postHandler = async () => {
     await createPost(Post);
     navigate("/");
   };
+
+  const dropdownHandler = () => {};
 
   return (
     <Box className={classes.container}>
@@ -108,6 +121,14 @@ const CreateView = () => {
           className={classes.textfield}
           name="title"
         ></InputBase>
+
+        <Dropdown
+          options={options}
+          onChange={dropdownHandler}
+          value={defaultOption}
+          placeholder="Select an option"
+        ></Dropdown>
+
         <Button
           onClick={() => postHandler()}
           variant="contained"

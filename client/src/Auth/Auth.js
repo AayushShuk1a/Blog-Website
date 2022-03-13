@@ -11,6 +11,8 @@ import React, { useState } from "react";
 import GoogleLogin from "react-google-login";
 import Icon from "./Icon";
 
+import { useNavigate } from "react-router-dom";
+
 import useStyles from "./styles";
 import Input from "./Input";
 
@@ -18,6 +20,7 @@ const Auth = () => {
   const classes = useStyles();
   const [isSignUp, setisSignUp] = useState(false);
   const [Showpassword, setShowpassword] = useState(false);
+  const navigate = useNavigate();
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -34,7 +37,11 @@ const Auth = () => {
   };
 
   const GoogleSuccess = async (res) => {
+    const username = res.profileObj.name;
+    console.log(username);
+    localStorage.setItem("profile", JSON.stringify({ username }));
     console.log(res);
+    navigate("/");
   };
 
   const GoogleFailure = () => {

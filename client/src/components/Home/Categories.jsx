@@ -33,11 +33,21 @@ const Catergories = () => {
   const classes = useStyles();
   return (
     <>
-      <Link to="/create" className={classes.link}>
-        <Button variant="contained" className={classes.button}>
-          Create Blog
-        </Button>
-      </Link>
+      {!localStorage.getItem("profile") && (
+        <Link to="/auth" className={classes.link}>
+          <Button variant="contained" className={classes.button}>
+            Create Blog
+          </Button>
+        </Link>
+      )}
+
+      {localStorage.getItem("profile") && (
+        <Link to="/create" className={classes.link}>
+          <Button variant="contained" className={classes.button}>
+            Create Blog
+          </Button>
+        </Link>
+      )}
 
       <Table className={classes.table}>
         <TableHead>
