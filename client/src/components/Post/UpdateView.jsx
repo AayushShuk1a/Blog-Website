@@ -10,6 +10,7 @@ import {
 import { AddCircle } from "@material-ui/icons";
 import { getPost, UpdatePost, UploadFile } from "../../Services/API";
 import { useNavigate, useParams } from "react-router-dom";
+import Dropdown from "react-dropdown";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -48,7 +49,7 @@ const initialValue = {
   picture: "",
   username: "",
   createData: new Date(),
-  categories: "All",
+  categories: [],
 };
 
 const UpdateView = () => {
@@ -59,6 +60,24 @@ const UpdateView = () => {
   const [File, setFile] = useState("");
   const [image, setImage] = useState("");
   const { id } = useParams();
+
+  const options = [
+    "Music",
+    "Tech",
+    "Entertainment",
+    "Sports",
+    "Fashion",
+    "Anime",
+  ];
+  const defaultOption = Post.categories[1];
+  let cat = [];
+
+  const dropdownHandler = (e) => {
+    cat = ["All"];
+    cat.push(e.value);
+    console.log(cat);
+    setPost({ ...Post, categories: cat });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,7 +139,20 @@ const UpdateView = () => {
           onChange={(e) => ChangeHandler(e)}
           name="title"
         ></InputBase>
-        <Button onClick={updateVlog} variant="contained" color="primary">
+
+        <Dropdown
+          options={options}
+          onChange={dropdownHandler}
+          value={defaultOption}
+          placeholder="Select an option"
+        ></Dropdown>
+
+        <Button
+          onClick={updateVlog}
+          variant="contained"
+          color="primary"
+          style={{ marginLeft: 20 }}
+        >
           Update
         </Button>
       </FormControl>

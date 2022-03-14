@@ -38,15 +38,19 @@ const useStyles = makeStyles({
 });
 const Post = (props) => {
   const classes = useStyles();
+
+  const Category =
+    props.post.categories.length > 1
+      ? props.post.categories[1]
+      : props.post.categories[0];
+
   const url = props.post.picture
     ? props.post.picture
     : "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80";
   return (
     <Box className={classes.container}>
       <img src={url} alt="Blog" className={classes.image}></img>
-      <Typography className={classes.textcolor}>
-        {props.post.categories}
-      </Typography>
+      <Typography className={classes.textcolor}>{Category}</Typography>
       <Typography className={classes.title}>{props.post.title}</Typography>
       <Typography className={classes.textcolor}>
         {props.post.username}

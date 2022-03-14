@@ -51,11 +51,18 @@ const initialValue = {
   picture: "",
   username: "",
   createData: new Date(),
-  categories: "All",
+  categories: [],
 };
 
 const CreateView = () => {
-  const options = ["Music", "Tech", "Movies", "Sports", "Fashion"];
+  const options = [
+    "Music",
+    "Tech",
+    "Entertainment",
+    "Sports",
+    "Fashion",
+    "Anime",
+  ];
   const defaultOption = options[0];
 
   let navigate = useNavigate();
@@ -63,6 +70,8 @@ const CreateView = () => {
   const [Post, setPost] = useState(initialValue);
   const [File, setFile] = useState("");
   const [image, setImage] = useState("");
+
+  let cat = [];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,7 +88,7 @@ const CreateView = () => {
     };
 
     fetchData();
-  }, [File]);
+  }, [File, cat]);
 
   const url = Post.picture
     ? Post.picture
@@ -98,7 +107,12 @@ const CreateView = () => {
     navigate("/");
   };
 
-  const dropdownHandler = () => {};
+  const dropdownHandler = (e) => {
+    cat = ["All"];
+    cat.push(e.value);
+    console.log(cat);
+    setPost({ ...Post, categories: cat });
+  };
 
   return (
     <Box className={classes.container}>
@@ -133,6 +147,7 @@ const CreateView = () => {
           onClick={() => postHandler()}
           variant="contained"
           color="primary"
+          style={{ marginLeft: 20 }}
         >
           Publish
         </Button>

@@ -38,8 +38,9 @@ const Auth = () => {
 
   const GoogleSuccess = async (res) => {
     const username = res.profileObj.name;
+    const token = res.profileObj.token;
     console.log(username);
-    localStorage.setItem("profile", JSON.stringify({ username }));
+    localStorage.setItem("profile", JSON.stringify({ username, token }));
     console.log(res);
     navigate("/");
   };

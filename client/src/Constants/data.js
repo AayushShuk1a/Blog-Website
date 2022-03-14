@@ -1,1 +1,8 @@
-export const catergories = ["Music", "Tech", "Movies", "Sports", "Fashion"];
+export const catergories = [
+  "Music",
+  "Tech",
+  "Entertainment",
+  "Sports",
+  "Fashion",
+  "Anime",
+];
