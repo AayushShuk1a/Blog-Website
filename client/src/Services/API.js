@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8000";
+const url = "https://say-yourmind.herokuapp.com";
 
 export const createPost = async (post) => {
   try {
