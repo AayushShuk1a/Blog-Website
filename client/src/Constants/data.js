@@ -5,4 +5,5 @@ export const catergories = [
   "Sports",
   "Fashion",
   "Anime",
+  "Other",
 ];

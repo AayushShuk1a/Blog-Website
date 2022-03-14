@@ -25,6 +25,10 @@ const PostSchema = mongoose.Schema({
     type: Array,
     required: false,
   },
+  googleID: {
+    type: String,
+    required: true,
+  },
 });
 
 const post = mongoose.model("post", PostSchema);

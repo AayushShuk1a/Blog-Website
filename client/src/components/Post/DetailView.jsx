@@ -81,8 +81,8 @@ const DetailView = () => {
         className={classes.image}
       ></img>
       {localStorage.getItem("profile") &&
-        post.username ===
-          JSON.parse(localStorage.getItem("profile")).username && (
+        post.googleID ===
+          JSON.parse(localStorage.getItem("profile")).googleID && (
           <Box className={classes.icons}>
             <Link to={`/update/${post._id}`}>
               <Edit className={classes.icon} color="primary" />

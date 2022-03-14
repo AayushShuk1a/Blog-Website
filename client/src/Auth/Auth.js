@@ -38,9 +38,10 @@ const Auth = () => {
 
   const GoogleSuccess = async (res) => {
     const username = res.profileObj.name;
-    const token = res.profileObj.token;
+    const googleID = res.googleId;
+
     console.log(username);
-    localStorage.setItem("profile", JSON.stringify({ username, token }));
+    localStorage.setItem("profile", JSON.stringify({ username, googleID }));
     console.log(res);
     navigate("/");
   };
@@ -100,13 +101,14 @@ const Auth = () => {
             )}
           </Grid>
           <Button
+            disabled
             variant="contained"
             type="submit"
             fullWidth
             color="primary"
             className={classes.submit}
           >
-            {isSignUp ? "Sign Up" : "Sign In"}
+            Sign In disabled please use Google Sign in
           </Button>
 
           <GoogleLogin

@@ -62,6 +62,7 @@ const CreateView = () => {
     "Sports",
     "Fashion",
     "Anime",
+    "Other",
   ];
   const defaultOption = options[0];
 
@@ -99,6 +100,7 @@ const CreateView = () => {
       ...Post,
       [e.target.name]: e.target.value,
       username: JSON.parse(localStorage.getItem("profile")).username,
+      googleID: JSON.parse(localStorage.getItem("profile")).googleID,
     });
   };
 

@@ -68,6 +68,7 @@ const UpdateView = () => {
     "Sports",
     "Fashion",
     "Anime",
+    "Other",
   ];
   const defaultOption = Post.categories[1];
   let cat = [];
