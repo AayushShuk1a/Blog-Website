@@ -24,7 +24,7 @@ const Posts = () => {
 
   return (
     <>
-      {posts.map((post) => (
+      {posts.reverse().map((post) => (
         <Grid key={post._id} item lg={3} sm={4} xs={12}>
           <Link
             to={`/details/${post._id}`}
