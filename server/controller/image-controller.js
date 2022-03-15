@@ -9,7 +9,7 @@ conn.once("open", () => {
   gfs.collection("fs");
 });
 
-const url = "http://localhost:8000";
+const url = "https://say-yourmind.herokuapp.com";
 
 export const UploadImage = async (request, response) => {
   try {
