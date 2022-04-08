@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "inherit",
   },
+  spaceAdded: {
+    whiteSpace: "pre-wrap",
+  },
 }));
 
 const DetailView = () => {
@@ -54,6 +57,7 @@ const DetailView = () => {
   const { id } = useParams();
   console.log(id);
   let navigate = useNavigate();
+  console.log(post.description);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -107,7 +111,7 @@ const DetailView = () => {
           {new Date(post.createData).toDateString()}
         </Typography>
       </Box>
-      <Typography>{post.description}</Typography>
+      <Typography className={classes.spaceAdded}>{post.description}</Typography>
     </Box>
   );
 };
