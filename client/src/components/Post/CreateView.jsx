@@ -89,7 +89,9 @@ const CreateView = () => {
     };
 
     fetchData();
-  }, [File, cat]);
+  }, [File]);
+
+  console.log(Post.picture);
 
   const url = Post.picture
     ? Post.picture
