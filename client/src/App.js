@@ -2,7 +2,7 @@ import { Box } from "@material-ui/core";
 
 import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import DetailView from "./components/Post/DetailView";
 import CreateView from "./components/Post/CreateView";
 import UpdateView from "./components/Post/UpdateView";
@@ -10,7 +10,7 @@ import Auth from "./Auth/Auth";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <NavBar />
       <Box style={{ marginTop: 64 }}>
         <Routes>
@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/update/:id" element={<UpdateView />}></Route>
         </Routes>
       </Box>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
