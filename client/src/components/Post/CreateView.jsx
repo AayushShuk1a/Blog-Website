@@ -6,6 +6,7 @@ import {
   InputBase,
   Button,
   TextareaAutosize,
+  CircularProgress,
 } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
 import { createPost, UploadFile } from "../../Services/API";
@@ -71,18 +72,21 @@ const CreateView = () => {
   const [Post, setPost] = useState(initialValue);
   const [File, setFile] = useState("");
   const [image, setImage] = useState("");
+  const [isFetching, setisFetching] = useState(false);
 
   let cat = [];
 
   useEffect(() => {
     const fetchData = async () => {
       if (File) {
+        setisFetching(true);
         const data = new FormData();
         data.append("name", File.name);
         data.append("file", File);
 
         const image = await UploadFile(data);
         Post.picture = image.data;
+        setisFetching(false);
 
         setImage(image.data);
       }
@@ -120,7 +124,11 @@ const CreateView = () => {
 
   return (
     <Box className={classes.container}>
-      <img src={url} alt="banner" className={classes.image}></img>
+      {isFetching ? (
+        <CircularProgress />
+      ) : (
+        <img src={url} alt="banner" className={classes.image}></img>
+      )}
 
       <FormControl className={classes.form}>
         <label htmlFor="addimage">
